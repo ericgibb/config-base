@@ -1,0 +1,13 @@
+# Nix / direnv
+result
+result-*
+.direnv/
+
+# Local settings and secrets
+.env.local
+.env.*.local
+
+# OS / editor
+.DS_Store
+
+# <stack-specific entries from stacks.md>

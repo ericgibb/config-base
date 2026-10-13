@@ -1,0 +1,26 @@
+# Project environment: direnv loads this when you cd in (run `direnv allow` once).
+# Tools come from flake.nix. See AGENTS.md "Environment" for the isolation level.
+strict_env
+
+# Isolation level. Pick one:
+#   inherit:  delete this block (devShell layered on top of your full shell)
+#   isolated: `isolate`         (default; keeps shell + agent basics: git, gh, nix, direnv, config,
+#                                zed, claude, codex, op, eza, bat, fzf, zoxide)
+#   bare:     `isolate --bare`  (keeps only nix)
+# Keep extra host tools by naming them: `isolate jq rg`. Prefer adding them to flake.nix.
+# `isolate` comes from ~/config (projects/isolate.sh); elsewhere this falls back to inherit.
+if declare -F isolate >/dev/null; then
+  isolate
+fi
+
+# Shell layers of the folders above, e.g. ~/Work's context (see ~/config/contexts).
+# Delete to keep this project independent of them.
+source_up_if_exists
+
+use flake
+
+# Project-local state (see the new-project skill's stacks.md), e.g.:
+# export CARGO_HOME="$PWD/.direnv/cargo"; PATH_add "$CARGO_HOME/bin"
+
+# Untracked, machine-local settings and secrets (gitignored; agents are blocked from reading it).
+dotenv_if_exists .env.local
