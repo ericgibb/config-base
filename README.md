@@ -5,7 +5,7 @@ tools, git, macOS, AI agents. Each domain folder says *what* you want; the tool 
 makes it happen (nix-darwin, home-manager, Homebrew) is an implementation detail
 inside it. Git history is the audit log, and any generation can be rolled back.
 
-It's public and meant to be forked (see "Make it yours"). Anything private, such as
+It's public, MIT-licensed (see `LICENSE`) and meant to be forked (see "Make it yours"). Anything private, such as
 work tools, a work identity or personal-only apps, lives in separate private context
 repos layered on top (see "Contexts").
 
@@ -145,8 +145,13 @@ git -C ~/config remote set-url origin git@github.com:ericgibb/config-base.git
 
 ### 3. First switch
 
-Installs nix-darwin, Homebrew and the apps; takes a while. `sudo` can't find `nix` on
-its own, so use the full path:
+First give your terminal **Full Disk Access** (System Settings → Privacy & Security →
+Full Disk Access → turn on Terminal, then reopen it). macOS only lets apps with it
+change the Accessibility settings this config sets (Control-scroll zoom); without it
+the switch stops at "Could not write domain com.apple.universalaccess".
+
+The switch installs nix-darwin, Homebrew and the apps; takes a while. `sudo` can't find
+`nix` on its own, so use the full path:
 
 ```sh
 sudo -H /nix/var/nix/profiles/default/bin/nix --extra-experimental-features 'nix-command flakes' \
@@ -200,6 +205,7 @@ Then the one-time manual steps below.
 - **Zed**: global AI rules live in its Rules Library (UI), not a file; projects' `AGENTS.md` is read automatically.
   To use Claude Code or Codex inside Zed, install them from the ACP Registry in the agent panel.
 - macOS may ask you to log out once for keyboard/trackpad defaults to apply.
+- Any other terminal you run `config rebuild` from (e.g. Zed's) needs Full Disk Access too.
 
 ### Working across machines
 
