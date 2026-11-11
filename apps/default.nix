@@ -43,6 +43,7 @@
     desktop = [
       "spotify"
       "1password"
+      "github" # GitHub Desktop
     ];
     # Other domains add their own apps: e.g. editor/ adds Zed.
 
